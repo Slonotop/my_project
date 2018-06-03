@@ -17,7 +17,7 @@ from django.contrib import admin
 from landing import views
 
 urlpatterns = [
-    url(r'^home$', views.home, name='home'),
+    url(r'^$', views.home, name='home'),
     url(r'^contacts$', views.contacts, name='contacts'),
     url(r'^akusticheskieudarnye$', views.akusticheskieudarnye, name='akusticheskieudarnye'),
     url(r'^ehlektronnyeudarnye$', views.ehlektronnyeudarnye, name='ehlektronnyeudarnye'),
