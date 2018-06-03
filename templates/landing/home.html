@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{#    <div class="section-top">#}
+{#        <img src="{% static 'static_dev/img/banner-2.jpg' %}" class="img-responsive" id="drum_home">#}
+{#    </div>#}
+    <div class="section section1">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                     <h3 class="text-center">
+                        Новые поступления:
+                    </h3>
+                </div>
+
+                {% for product_image in products_images %}
+                    {% include 'landing/product_item.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{#    <div class="section section-delivery">#}
+{#        <h3>Сегодня бесплатная доставка</h3>#}
+{#    </div>#}
+
+    <div class="section section2 phones-container">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                     <h3 class="text-center">
+                        Рекомендуем посмотреть вам эти товары:
+                    </h3>
+                </div>
+
+                {% for product_image in products_images_akusticheskieudarnye %}
+                    {% include 'landing/product_item.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+{#    <div class="section section3 laptops-container">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{##}
+{#                <div class="col-lg-12">#}
+{#                     <h3 class="text-center">#}
+{#                        Рекомендуемые ноутбуки#}
+{#                     </h3>#}
+{#                </div>#}
+{##}
+{#                {% for product_image in products_images_laptops %}#}
+{#                    {% include 'landing/product_item.html' %}#}
+{#                {% endfor %}#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

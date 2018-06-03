@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="section section2 phones-container">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                     <h3 class="text-center">
+                        Акустические ударные установки:
+                    </h3>
+                </div>
+
+                {% for product_image in products_images_akusticheskieudarnye %}
+                    {% include 'landing/product_item.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,104 @@
+<!-- Static navbar -->
+{#    <nav class="navbar navbar-default navbar-top">#}
+{#        df#}
+{#    </nav>#}
+{#    <nav class="navbar navbar-default navbar-top">#}
+{#        navbar2#}
+{#    </nav>#}
+    <nav class="navbar navbar-default navbar-main">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}">Интернет-магазин</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'home' %}">Главная</a></li>
+{#            <li><a href="#about">About</a></li>#}
+
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ударные установки<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'akusticheskieudarnye' %}">Акустические ударные</a></li>
+                <li><a href="{% url 'ehlektronnyeudarnye' %}">Электронные ударные</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Перкуссия<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'instrumentysmembranoj' %}">Инструменты с мембраной</a></li>
+                <li><a href="{% url 'samozvuchashchieinstrumenty' %}">Самозвучащие инструменты</a></li>
+              </ul>
+            </li>
+
+               <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Аксессуары и комплектующие<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'zapchastiikomplektuyushchie' %}">Запчасти и комплектующие</a></li>
+                <li><a href="{% url 'barabannyepalochkiishchyotki' %}">Барабанные палочки и щётки</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{% url 'contacts' %}">О нас</a></li>
+
+              <li>
+                <div id="basket_container">
+
+                    <a href="{% url 'checkout' %}" class="btn btn-info">КОРЗИНА <span id="basket_total_amount"></span><span id="basket_total_nmb">
+                        {% if products_total_nmb %}
+                            ({{ products_total_nmb }})
+                        {% else %}
+                            (0)
+                        {% endif %}
+                    </span></a>
+{#                    <div class="basket-items hidden">#}
+{#                        <ul class="">#}
+{#                            {% for product_in_basket in products_in_basket %}#}
+{#                            <li>#}
+{#                                {{ product_in_basket.product.name }} {{ product_in_basket.nmb }} шт.#}
+{#                                по  {{ product_in_basket.price_per_item }}$#}
+{#                                <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">x</a>#}
+{##}
+{#                            </li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+{#                    </div>#}
+                </div>
+            </li>
+
+          </ul>
+{#          <ul class="nav navbar-nav navbar-right">#}
+{#            <li>#}
+{#                <div id="basket_container">#}
+{##}
+{#                    <a href="{% url 'checkout' %}" class="btn btn-info">КОРЗИНА <span id="basket_total_amount"></span><span id="basket_total_nmb">#}
+{#                        {% if products_total_nmb %}#}
+{#                            ({{ products_total_nmb }})#}
+{#                        {% else %}#}
+{#                            (0)#}
+{#                        {% endif %}#}
+{#                    </span></a>#}
+{#                    <div class="basket-items hidden">#}
+{#                        <ul class="">#}
+{#                            {% for product_in_basket in products_in_basket %}#}
+{#                            <li>#}
+{#                                {{ product_in_basket.product.name }} {{ product_in_basket.nmb }} шт.#}
+{#                                по  {{ product_in_basket.price_per_item }}$#}
+{#                                <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">x</a>#}
+{##}
+{#                            </li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+{#          </ul>#}
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

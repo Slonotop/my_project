@@ -1,0 +1,80 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <title>Интернет-магазин ударных музыкальных инструментов</title>
+        <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="{% static "static_dev/css/style.css" %}" rel='stylesheet' type='text/css' />
+{#    <link href="{% static "static_dev/css/etalage.css" %}" rel='stylesheet' type='text/css' />#}
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">#}
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="wrapper-content">
+            {% include 'navbar.html' %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+
+        {% include 'footer.html' %}
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script src="{% static 'static_dev/js/scripts.js' %}"></script>
+
+
+{#    <script>#}
+{#        $(function () {#}
+{#      $('#carousel').carousel({#}
+{#        interval: 50,#}
+{#        keyboard: false,#}
+{#        ride: 'carousel'#}
+{#      });#}
+{#    });#}
+{#    </script>#}
+
+
+{#    <!-- jQuery -->#}
+{#    <script src="/examples/vendors/jquery/jquery-3.3.1.min.js"></script>#}
+{#    <!-- Popper -->#}
+{#    <script src="/examples/vendors/popper.js/popper.min.js"></script>#}
+{##}
+{##}
+{##}
+{#    <!-- Bootstrap JS -->#}
+{#    <script src="/examples/vendors/bootstrap-4.1/js/bootstrap.min.js"></script>#}
+
+{#    <script src="{% static 'static_dev/js/jquery.etalage.min.js' %}"></script>#}
+{##}
+{#    <script>#}
+{#    jQuery(document).ready(function($){#}
+{##}
+{#        $('#etalage').etalage({#}
+{#            thumb_image_width: 550,#}
+{#            thumb_image_height: 400,#}
+{#            source_image_width: 1000,#}
+{#            source_image_height: 850,#}
+{#            show_hint: true#}
+{#        });#}
+{##}
+{#    });#}
+{#    </script>#}
+
+</body>
+</html>
