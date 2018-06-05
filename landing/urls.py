@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^zapchastiikomplektuyushchie$', views.zapchastiikomplektuyushchie, name='zapchastiikomplektuyushchie'),
     url(r'^barabannyepalochkiishchyotki$', views.barabannyepalochkiishchyotki, name='barabannyepalochkiishchyotki'),
     url(r'^checkout$', views.checkout, name='checkout'),
+    url(r'^checkout_order$', views.checkout_order, name='checkout_order'),
     url(r'^landing/$', views.landing, name='landing'),
 ]

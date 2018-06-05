@@ -24,12 +24,17 @@ class Product (models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+
     def __str__(self):
         return "%s / Цена: %s" % (self.name, self.price)
 
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+    def get_image(self):
+        images = ProductImage.objects.get(is_active=True, is_main=True, product__id=self.id)
+        return "%s" % images.image.url
 
 
 class ProductImage (models.Model):

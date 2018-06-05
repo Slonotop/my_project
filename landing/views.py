@@ -72,3 +72,7 @@ def barabannyepalochkiishchyotki(request):
     products_images = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active=True)
     products_images_barabannyepalochkiishchyotki = products_images.filter(product__category__id=10)
     return render(request, 'landing/barabannyepalochkiishchyotki.html', locals())
+
+
+def checkout_order(request):
+    return render(request, 'orders/checkout-order.html', locals())

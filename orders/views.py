@@ -23,7 +23,7 @@ def basket_adding(request):
             new_product.nmb += int(nmb)
             new_product.save(force_update=True)
 
-    #common code for 2 cases
+    # common code for 2 cases
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
     products_total_nmb = products_in_basket.count()
     return_dict["products_total_nmb"] = products_total_nmb
@@ -50,28 +50,78 @@ def checkout(request):
         if form.is_valid():
             print("yes")
             data = request.POST
-            name = data.get("name", "313212")
-            phone = data["phone"]
-            user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
+            # name = data["name"]
+            name = data.get("name", "3423453")
+        phone = data["phone"]
+        user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
 
-            order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
-            for name, value in data.items():
-                if name.startswith("product_in_basket_"):
-                    product_in_basket_id = name.split("product_in_basket_")[1]
-                    product_in_basket = ProductInBasket.objects.get(id=product_in_basket_id)
-                    print(type(value))
+        order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+        for name, value in data.items():
+            if name.startswith("product_in_basket_"):
+                product_in_basket_id = name.split("product_in_basket_")[1]
+                product_in_basket = ProductInBasket.objects.get(id=product_in_basket_id)
+                print(type(value))
 
-                    product_in_basket.nmb = value
-                    product_in_basket.order = order
-                    product_in_basket.save(force_update=True)
+                product_in_basket.nmb = value
+                product_in_basket.order = order
+                product_in_basket.save(force_update=True)
 
-                    ProductInOrder.objects.create(product = product_in_basket.product, nmb = product_in_basket.nmb,
-                                                  price_per_item=product_in_basket.price_per_item,
-                                                  total_price=product_in_basket.total_price,
-                                                  order=order)
+                ProductInOrder.objects.create(product=product_in_basket.product, nmb=product_in_basket.nmb,
+                                              price_per_item=product_in_basket.price_per_item,
+                                              total_price=product_in_basket.total_price,
+                                              order=order)
+                ProductInBasket.objects.filter(session_key=session_key, pk=product_in_basket_id).delete()
+                return render(request, 'orders/checkout-order.html', locals())
 
-
-
-        else:
-            print("no")
+    else:
+        print("no")
     return render(request, 'orders/checkout.html', locals())
+
+
+def checkoutRemove(request):
+    return_dict = dict()
+    session_key = request.session.session_key
+    data = request.POST
+    print(data)
+
+
+    id = data.get("id")
+
+    count = data.get("count")
+    is_delete = data.get("is_delete")
+
+    if is_delete == 'true':
+        ProductInBasket.objects.filter(session_key=session_key, product_id=id).delete()  # update(is_active=False)
+    else:
+        new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key, product_id=id,
+                                                                     defaults={"nmb": count})
+        if not created:
+            new_product.nmb = int(count)
+            new_product.save(force_update=True)
+
+    products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+    products_total_nmb = products_in_basket.count()
+    return_dict["products_total_nmb"] = products_total_nmb
+    return JsonResponse(return_dict)
+
+
+def checkoutContinue(request):
+    return_dict = dict()
+    session_key = request.session.session_key
+    data = request.POST
+    print(data)
+
+
+    id = data.get("id")
+    count = data.get("count")
+    if int(count) < 1:
+        return JsonResponse(status=400)
+    new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key, product_id=id,
+                                                                 defaults={"nmb": count})
+    if not created:
+        new_product.nmb = int(count)
+        new_product.save(force_update=True)
+    products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+    products_total_nmb = products_in_basket.count()
+    return_dict["products_total_nmb"] = products_total_nmb
+    return JsonResponse(return_dict)

@@ -6,19 +6,19 @@
         <div class="row">
             {% if products_in_basket %}
 {#                после if not#}
-                <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-10 col-lg-offset-1">
                     <h3 class="text-center">Корзина товаров</h3>
 {#                    <h5 class="text-center">Общая стоимость: {{ request.session.basket.total_amount }} $ </h5>#}
                         {{ request.session.basket.products }}
 
 
-
+<form class="form-horizontal" method="post" action="{% url 'checkout' %}">{% csrf_token %}
                         <div class="form-inline" method="post">{% csrf_token %}
-
+{#                            <div class="col-lg-12 center">#}
                             <div class="form-inline">
 
-                                <h4 class="text-center">Пожалуйста, введите данные:</h4><br>
-                                    <div class="col-lg-4">
+                                <br><h5 class="text-center">Пожалуйста, введите данные:</h5><br>
+                                    <div class="col-lg-4 col-lg-offset-2">
 
                                         Имя:
                                         <span class="form-error">{{ form.name.errors }}</span>
@@ -29,7 +29,7 @@
                                 </div>
 
                             <div class="form-inline">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     Телефон:
                                     <span class="form-error">{{ form.phone.errors }}</span>
                                     <input type="text" name="{{ form.phone.html_name }}"  class="form-control"
@@ -37,23 +37,31 @@
                                     >
                                 </div>
                             </div>
+{#                            </div>#}
                         <div class="col-lg-12">
-                        <br><h4 class="text-center">Проверьте свой заказ:</h4><br>
+                        <br><h5 class="text-center">Проверьте свой заказ:</h5><br>
                         </div>
-                            <table class="table text-center">
+                            <table class="table table-striped table-bordered">
 
                                 <thead>
-                                    <tr>
-                                        <th>Название товара</th>
+                                    <tr class="h5">
+                                        <th>Фото товара</th>
+                                        <th id="td_name_checkout">Название товара</th>
                                         <th>Количество</th>
                                         <th>Цена за единицу</th>
                                         <th>Общая цена</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for product_in_basket in products_in_basket %}
                                         <tr>
+											<input type="hidden" name="item-index" class="item-index" value="{{ forloop.counter }}">
+											<input type="hidden" name="item-id" class="item-id" value="{{ product_in_basket.product.id }}">
                                             <td>
+                                                 <img src="{{ product_in_basket.product.get_image }}" class="img-responsive img-responsive-checkout">
+                                            </td>
+                                            <td id="td_name_checkout">
                                                  {{ product_in_basket.product.name }}
                                             </td>
                                             <td>
@@ -71,12 +79,19 @@
                                                     {{ product_in_basket.total_price }} $
                                                 </span>
                                             </td>
+                                            <td class="delete_checkout">
+                                                <a href="" class="btn btn-danger">
+                                                    Удалить
+                                                </a>
+
+                                            </td>
                                         </tr>
+
                                     {% endfor %}
                                 </tbody>
                             </table>
                                 <div class="text-right">
-                                    <h4>Сумма заказа:  <span id="total_order_amount"></span> $</h4>
+                                    <h4 id="h_summa_zakaza">Сумма заказа:  <span id="total_order_amount"></span> $</h4>
                                 </div>
 
                                 <div class="text-right">
