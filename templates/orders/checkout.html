@@ -18,25 +18,38 @@
                             <div class="form-inline">
 
                                 <br><h5 class="text-center">Пожалуйста, введите данные:</h5><br>
-                                    <div class="col-lg-4 col-lg-offset-2">
+                                    <div class="col-lg-6 col-lg-offset-3 ">
 
-                                        Имя:
-                                        <span class="form-error">{{ form.name.errors }}</span>
-                                        <input type="text" name="{{ form.name.html_name }}" class="form-control"
-                                            value="{{ request.POST.name }}"
-                                        >
+{#                                        <div class="input" id="vvod_checkout">#}
+{#                                            {{ form.as_p }}#}
+{#                                        </div>#}
+                                        <div id="vvod_checkout">
+                                            {{ form.name.errors }}
+                                                Имя:
+{#                                            <div class="form-control">#}
+                                                {{ form.name }}
+{#                                            </div>#}
+
+                                            {{ form.phone.errors }}
+                                                Телефон:
+{#                                            <div class="form-control">#}
+                                                {{ form.phone }}
+{#                                            </div>#}
+                                        </div>
+
+
                                     </div>
                                 </div>
 
-                            <div class="form-inline">
-                                <div class="col-lg-4">
-                                    Телефон:
-                                    <span class="form-error">{{ form.phone.errors }}</span>
-                                    <input type="text" name="{{ form.phone.html_name }}"  class="form-control"
-                                        value="{{ request.POST.phone }}"
-                                    >
-                                </div>
-                            </div>
+{#                            <div class="form-inline">#}
+{#                                <div class="col-lg-4">#}
+{#                                    Телефон:#}
+{#                                    <span class="form-error">{{ form.phone.errors }}</span>#}
+{#                                    <input type="text" name="{{ form.phone.html_name }}"  class="form-control"#}
+{#                                        value="{{ request.POST.phone }}"#}
+{#                                    >#}
+{#                                </div>#}
+{#                            </div>#}
 {#                            </div>#}
                         <div class="col-lg-12">
                         <br><h5 class="text-center">Проверьте свой заказ:</h5><br>
@@ -62,7 +75,10 @@
                                                  <img src="{{ product_in_basket.product.get_image }}" class="img-responsive img-responsive-checkout">
                                             </td>
                                             <td id="td_name_checkout">
-                                                 {{ product_in_basket.product.name }}
+                                                <a href="{% url 'product' product_in_basket.product.id %}">
+                                                    {{ product_in_basket.product.name }}
+                                                </a>
+
                                             </td>
                                             <td>
                                                  <input value="{{  product_in_basket.nmb }}" type="number"
